@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title slot="start">Master Nerak Pokedex</ion-title>
+    <ion-buttons slot="end">
+      <ion-button type="button" (click)="onLogout()" color="primary">
+       <ion-label>Log Out</ion-label>
+      </ion-button>
+    </ion-buttons>    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-sm="8" offset-sm="2" class="ion-text-center">
+        
+            <ion-select style="border:lightgray 1px solid; border-radius: 4px;"
+                        placeholder="Select Generation" interface="popover" #generation ngModel id="generation" class="ion-text-capitalize" name="generation" (ngModelChange)="onSelectGeneration(generation)">
+            <ion-select-option [value]="i+1" *ngFor ="let generation of loadedGenerations; let i= index">Generation {{i+1}}
+            </ion-select-option>
+          </ion-select>
+        
+      </ion-col>
+    </ion-row>   
+    <ion-row >
+      <ion-col size="12" size-sm="8" offset-sm="2" class="ion-text-center">
+        <ion-list *ngIf="loadedGenerationData.name">
+          <ion-list-header>
+            <ion-label style="text-align:left;text-transform:capitalize;">{{loadedGenerationData.name}}</ion-label>
+          </ion-list-header>
+            <ion-item
+            *ngFor="let pokemon of loadedGenerationData.pokemon_species;let i=index"
+            (click)="onSearch(pokemon.name)"
+            detail>
+            <ion-label>             
+              <p class="ion-text-capitalize">{{ pokemon.name }}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

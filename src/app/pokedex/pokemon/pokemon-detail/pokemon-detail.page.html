@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/pokemon">Back</ion-back-button>
+    </ion-buttons>
+    <ion-title>Master Nerak Pokedex</ion-title>
+  </ion-toolbar>  
+</ion-header>
+<ion-content>  
+       <ion-grid class="ion-no-padding">
+        <ion-row >
+          <ion-col size-sm="6" offset-sm="3" class="ion-no-padding">
+            <ion-searchbar enterkeyhint="search" debounce="1500" searchIcon="search-outline" (ionChange)="onSearch($event)" #search></ion-searchbar>  
+         </ion-col>
+        </ion-row>
+          <ion-row *ngIf="pokemonDetails && !isLoading">
+            <ion-col size-sm="6" offset-sm="3" class="ion-no-padding ion-text-center">
+              <ion-card>                
+                  <ion-card-header>
+                    <ion-card-title>
+                <ion-label class="ion-text-center" style="text-transform: capitalize;">{{pokemonDetails.name}}</ion-label>
+              </ion-card-title> 
+            </ion-card-header>
+            <ion-img [src]="pokemonDetails.imgPath" style="height:16rem;align-items: center;"></ion-img>
+            <ion-card-content *ngIf="!isError">
+              <p>Type: {{pokemonDetails.types.join(',')}}</p>
+              <p>Stat: {{pokemonDetails.stats.join(',')}}</p>
+              <p>Ability: {{pokemonDetails.abilities.join(',')}}</p>
+            </ion-card-content>            
+          </ion-card>      
+            </ion-col>
+          </ion-row>
+        </ion-grid>   
+</ion-content>
